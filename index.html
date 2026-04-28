@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上海中考·跨学科复习宝典</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #dbeafe;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --orange: #ea580c;
+      --orange-light: #fff7ed;
+      --red: #dc2626;
+      --red-light: #fee2e2;
+      --purple: #7c3aed;
+      --purple-light: #ede9fe;
+      --teal: #0d9488;
+      --teal-light: #ccfbf1;
+      --gray: #6b7280;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --text-light: #64748b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ─── Header ─────────────────────────────── */
+    .header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #2563eb 100%);
+      color: white;
+      padding: 24px 20px 20px;
+      text-align: center;
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .header h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .header p { font-size: 13px; opacity: 0.85; }
+    .header-stats {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 16px;
+    }
+    .stat-item {
+      background: rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 8px 16px;
+      text-align: center;
+    }
+    .stat-num { font-size: 20px; font-weight: 800; }
+    .stat-label { font-size: 11px; opacity: 0.8; }
+
+    /* ─── Tab Nav ─────────────────────────────── */
+    .tab-nav {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      scrollbar-width: none;
+    }
+    .tab-nav::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      flex-shrink: 0;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-light);
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--primary); }
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    /* ─── Tab Content ─────────────────────────── */
+    .tab-content { display: none; padding: 16px; max-width: 680px; margin: 0 auto; }
+    .tab-content.active { display: block; }
+
+    /* ─── Cards ───────────────────────────────── */
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .icon-blue { background: var(--primary-light); }
+    .icon-green { background: var(--green-light); }
+    .icon-orange { background: var(--orange-light); }
+    .icon-red { background: var(--red-light); }
+    .icon-purple { background: var(--purple-light); }
+    .icon-teal { background: var(--teal-light); }
+
+    /* ─── Alert boxes ─────────────────────────── */
+    .alert {
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .alert-info { background: var(--primary-light); border-left: 4px solid var(--primary); }
+    .alert-success { background: var(--green-light); border-left: 4px solid var(--green); }
+    .alert-warning { background: var(--orange-light); border-left: 4px solid var(--orange); }
+    .alert-danger { background: var(--red-light); border-left: 4px solid var(--red); }
+    .alert-purple { background: var(--purple-light); border-left: 4px solid var(--purple); }
+    .alert-teal { background: var(--teal-light); border-left: 4px solid var(--teal); }
+    .alert strong { display: block; margin-bottom: 4px; }
+
+    /* ─── Score Table ─────────────────────────── */
+    .score-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 6px; }
+    .score-table th {
+      background: var(--primary);
+      color: white;
+      padding: 8px 10px;
+      text-align: left;
+      font-weight: 600;
+    }
+    .score-table th:first-child { border-radius: 8px 0 0 0; }
+    .score-table th:last-child { border-radius: 0 8px 0 0; }
+    .score-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+    .score-table tr:last-child td { border-bottom: none; }
+    .score-table tr:nth-child(even) td { background: var(--bg); }
+
+    /* ─── Lists ───────────────────────────────── */
+    ul.tip-list { list-style: none; padding: 0; }
+    ul.tip-list li {
+      padding: 7px 0 7px 22px;
+      position: relative;
+      font-size: 13.5px;
+      line-height: 1.6;
+      border-bottom: 1px dashed var(--border);
+    }
+    ul.tip-list li:last-child { border-bottom: none; }
+    ul.tip-list li::before {
+      content: "▸";
+      position: absolute;
+      left: 4px;
+      color: var(--primary);
+      font-size: 12px;
+    }
+    ul.tip-list.green li::before { color: var(--green); }
+    ul.tip-list.orange li::before { color: var(--orange); }
+
+    ol.step-list { padding-left: 0; list-style: none; counter-reset: steps; }
+    ol.step-list li {
+      counter-increment: steps;
+      padding: 8px 0 8px 36px;
+      position: relative;
+      font-size: 13.5px;
+      line-height: 1.6;
+      border-bottom: 1px dashed var(--border);
+    }
+    ol.step-list li:last-child { border-bottom: none; }
+    ol.step-list li::before {
+      content: counter(steps);
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 24px;
+      height: 24px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ─── Tags / Badges ───────────────────────── */
+    .tag {
+      display: inline-block;
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-right: 4px;
+    }
+    .tag-blue { background: var(--primary-light); color: var(--primary); }
+    .tag-green { background: var(--green-light); color: var(--green); }
+    .tag-orange { background: var(--orange-light); color: var(--orange); }
+    .tag-red { background: var(--red-light); color: var(--red); }
+    .tag-purple { background: var(--purple-light); color: var(--purple); }
+
+    /* ─── Grid ────────────────────────────────── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .mini-card {
+      background: var(--bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 12px;
+    }
+    .mini-card-title { font-size: 12px; font-weight: 700; color: var(--text-light); margin-bottom: 6px; }
+    .mini-card-body { font-size: 13px; line-height: 1.6; }
+
+    /* ─── Formula box ─────────────────────────── */
+    .formula {
+      background: #f0f9ff;
+      border: 1.5px solid #bae6fd;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13.5px;
+      line-height: 1.8;
+      margin: 8px 0;
+      font-family: "Courier New", monospace;
+      color: #0c4a6e;
+    }
+
+    /* ─── Chain / Flow ────────────────────────── */
+    .chain {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px;
+      margin: 8px 0;
+      font-size: 13px;
+    }
+    .chain-item {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-weight: 600;
+    }
+    .chain-arrow { color: var(--gray); font-size: 16px; }
+
+    /* ─── Section divider ─────────────────────── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin: 16px 0 8px;
+      padding-left: 4px;
+    }
+
+    /* ─── Year badge ──────────────────────────── */
+    .year-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: white;
+      border-radius: 8px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    /* ─── Highlight text ──────────────────────── */
+    .hl-blue { color: var(--primary); font-weight: 700; }
+    .hl-green { color: var(--green); font-weight: 700; }
+    .hl-orange { color: var(--orange); font-weight: 700; }
+    .hl-red { color: var(--red); font-weight: 700; }
+
+    /* ─── Sub heading ─────────────────────────── */
+    .sub-heading {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 12px 0 6px;
+      padding-bottom: 4px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+
+    p.note {
+      font-size: 12px;
+      color: var(--text-light);
+      line-height: 1.5;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<div class="header">
+  <div class="header-badge">📐 上海中考 · 综合测试</div>
+  <h1>跨学科案例分析 复习宝典</h1>
+  <p>地理 × 生命科学 — 15分不丢分指南</p>
+  <div class="header-stats">
+    <div class="stat-item">
+      <div class="stat-num">15</div>
+      <div class="stat-label">满分</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">核心能力</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">20</div>
+      <div class="stat-label">考试分钟</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">历年真题</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ TABS ═══════════════ -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('overview')">📋 考试总览</button>
+  <button class="tab-btn" onclick="showTab('ability')">🎯 三大能力</button>
+  <button class="tab-btn" onclick="showTab('biology')">🌿 生命科学</button>
+  <button class="tab-btn" onclick="showTab('geography')">🌍 地理知识</button>
+  <button class="tab-btn" onclick="showTab('template')">📝 答题模板</button>
+  <button class="tab-btn" onclick="showTab('cases')">📚 历年真题</button>
+  <button class="tab-btn" onclick="showTab('sprint')">🚀 冲刺提分</button>
+</div>
+
+<!-- ═══════════════ TAB: 考试总览 ═══════════════ -->
+<div id="tab-overview" class="tab-content active">
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-blue">📋</span>
+      考试基本信息
+    </div>
+    <table class="score-table">
+      <tr><th>项目</th><th>详情</th></tr>
+      <tr><td>所在科目</td><td>综合测试（物理70+化学50+跨学科15+实验操作15）</td></tr>
+      <tr><td>满分</td><td><strong>15分</strong>，计入中考总分</td></tr>
+      <tr><td>考试时间</td><td>约20分钟，闭卷</td></tr>
+      <tr><td>题量</td><td>通常5～6题，前4题选择题 + 后2题综合简答</td></tr>
+      <tr><td>涉及学科</td><td>生命科学（生物）× 地理</td></tr>
+      <tr><td>教材范围</td><td>地理六/七年级+乡土地理（5本）；生命科学八年级（2本）</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-orange">⚡</span>
+      为什么7分→15分有可能？
+    </div>
+    <div class="alert alert-warning">
+      <strong>跨学科是中考"弯道超车"最佳赛道</strong>
+      不会做 = 4～5分；掌握方法 = 14～15分。分值差距巨大，且题目套路固定，备考性价比极高！
+    </div>
+    <div class="alert alert-info">
+      <strong>关键认知：不考死记硬背，考迁移应用</strong>
+      题目一定会给你新的情境材料（图/表/文），用已学知识去分析，不是默写知识点。
+    </div>
+    <div class="alert alert-success">
+      <strong>得分公式</strong>
+      读懂材料（信息提取4分）+ 逻辑分析（问题分析7分）+ 结论创新（阐释创新4分）
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-green">📊</span>
+      分值详细分配
+    </div>
+    <table class="score-table">
+      <tr><th>能力维度</th><th>分值</th><th>核心要求</th></tr>
+      <tr>
+        <td><span class="tag tag-blue">信息提取</span></td>
+        <td><strong>4分</strong></td>
+        <td>从图/表/文中精准提取，概括推理，不能照抄</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-orange">问题分析</span></td>
+        <td><strong>7分 ⭐最重要</strong></td>
+        <td>用地理+生物原理综合分析，论证结论合理性</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-purple">结论创新</span></td>
+        <td><strong>4分</strong></td>
+        <td>用已有结论解释机制，提新方案新观点</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-red">🔍</span>
+      题型分布（综合情境套题）
+    </div>
+    <div class="grid-2">
+      <div class="mini-card">
+        <div class="mini-card-title">客观题（前4题）</div>
+        <div class="mini-card-body">✓ 选择题（单选）<br>✓ 填空题<br>✓ 排序题<br>✓ 配对题</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-card-title">主观题（后2题）</div>
+        <div class="mini-card-body">✓ 填表题<br>✓ 制图题<br>✓ 简答分析题<br>✓ 建议/方案题</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:10px">⚠️ 2024年起，读图读表能力显著加强，图例/坐标轴/趋势是关键！</p>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB: 三大能力 ═══════════════ -->
+<div id="tab-ability" class="tab-content">
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-blue">① </span>
+      信息提取与处理（4分）
+    </div>
+    <div class="alert alert-info">
+      <strong>本质：读懂材料，提炼有效信息</strong>
+      不是复制粘贴，要概括、抽象、推理。
+    </div>
+    <div class="sub-heading">读材料三步走</div>
+    <ol class="step-list">
+      <li><strong>先看标题</strong> — 确定主角（什么生物/什么地方）</li>
+      <li><strong>看图例/坐标轴</strong> — 理解横纵轴含义，找极值、趋势</li>
+      <li><strong>圈关键数据</strong> — 最高/最低/转折点 = 答题依据</li>
+    </ol>
+    <div class="sub-heading">常见信息提取陷阱</div>
+    <div class="alert alert-danger">
+      <strong>❌ 直接抄材料原话</strong> → 不得分<br>
+      ✅ 用自己语言+学科术语重新表达，说明"说明了什么"
+    </div>
+    <div class="alert alert-warning">
+      <strong>❌ 只看文字，不看图表</strong> → 漏掉关键信息<br>
+      ✅ 文字和图表都要仔细读，信息通常互补
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-orange">② </span>
+      问题分析与质疑（7分）⭐核心
+    </div>
+    <div class="alert alert-warning">
+      <strong>分值最高！这里拉开差距</strong>
+      要求用地理 + 生命科学双重视角分析，论证结论。
+    </div>
+    <div class="sub-heading">万能答题链条</div>
+    <div class="formula">
+      地理环境特征（地形/气候/位置）
+      → 对生物产生的影响
+      → 生物的适应性表现（形态/生理/行为）
+      → 结论
+    </div>
+    <div class="sub-heading">两类高频问法</div>
+    <div class="alert alert-info">
+      <strong>问"原因/为什么"</strong>：先写地理条件，再写生物响应，因果链完整。<br>
+      例：该地降水少（地）→ 植物根系发达（生）→ 吸收深层水分→ 适应干旱
+    </div>
+    <div class="alert alert-success">
+      <strong>问"分析/说明"</strong>：从两学科各写一点，用①②分点，不要写成流水账。
+    </div>
+    <div class="sub-heading">关键术语替换</div>
+    <table class="score-table">
+      <tr><th>大白话（-分）</th><th>学科术语（得分）</th></tr>
+      <tr><td>太阳光多</td><td>光照充足，太阳辐射强</td></tr>
+      <tr><td>气候热</td><td>气温高，热量充足</td></tr>
+      <tr><td>有雨</td><td>降水丰沛，水分充足</td></tr>
+      <tr><td>长得好</td><td>光合作用强，有机物积累多</td></tr>
+      <tr><td>山上冷</td><td>海拔高，气温低，昼夜温差大</td></tr>
+      <tr><td>地方平</td><td>地形平坦，地势开阔</td></tr>
+      <tr><td>杀虫子</td><td>低温抑制害虫繁殖，减少病虫害</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-purple">③ </span>
+      结论阐释与创新（4分）
+    </div>
+    <div class="alert alert-purple">
+      <strong>难度最高，但分值固定4分，不要放弃！</strong>
+      掌握套路就能稳拿3分。
+    </div>
+    <div class="sub-heading">两种题型</div>
+    <div class="alert alert-info">
+      <strong>A. 解释型：</strong>"根据上述结论，解释……的原因"<br>
+      套路：重复材料中的已知结论 → 用"因为……所以……"推导到新现象
+    </div>
+    <div class="alert alert-success">
+      <strong>B. 方案建议型：</strong>"请你提出改善建议/保护措施"<br>
+      套路：从地理角度（工程措施）+ 生物角度（生态措施）+ 管理角度各写一点
+    </div>
+    <div class="sub-heading">万能建议模板</div>
+    <div class="formula">
+      工程措施：建（防护林/水库/梯田/绿化带）
+      生态措施：退耕还林/建自然保护区/禁止捕猎/减少污染
+      管理措施：立法/宣传教育/减少人类活动干扰
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB: 生命科学 ═══════════════ -->
+<div id="tab-biology" class="tab-content">
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-green">🔗</span>
+      食物链 · 食物网（必考）
+    </div>
+    <div class="alert alert-danger">
+      <strong>3条死规则，写错就丢分</strong>
+      ① 起点必须是生产者（植物）；② 箭头方向：被吃 → 吃者；③ 不包含分解者和非生物成分
+    </div>
+    <div class="sub-heading">标准写法示例</div>
+    <div class="chain">
+      <span class="chain-item">草</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-item">兔</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-item">狐狸</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-item">狼</span>
+    </div>
+    <div class="sub-heading">能量流动规律</div>
+    <ul class="tip-list green">
+      <li>能量沿食物链流动时，每个营养级只保留约10%～20%</li>
+      <li>营养级越高，能量越少，个体数量越少</li>
+      <li>若某种生物数量减少，其天敌数量也会减少（短期）</li>
+    </ul>
+    <div class="sub-heading">生态平衡</div>
+    <ul class="tip-list">
+      <li>食物链/网越复杂，生态系统自我调节能力越强，越稳定</li>
+      <li>人类活动破坏→生物多样性减少→稳定性下降</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-blue">☀️</span>
+      光合作用 · 呼吸作用（核心）
+    </div>
+    <div class="sub-heading">光合作用（白天/光照）</div>
+    <div class="formula">
+      CO₂ + H₂O  ──光照+叶绿素──→  有机物 + O₂
+      影响因素：光照强度↑、CO₂浓度↑、温度适宜 → 光合速率↑
+    </div>
+    <div class="sub-heading">呼吸作用（全天）</div>
+    <div class="formula">
+      有机物 + O₂  ──────────→  CO₂ + H₂O + 能量
+      影响因素：温度越高 → 呼吸越强 → 消耗有机物越多
+    </div>
+    <div class="alert alert-success">
+      <strong>跨学科黄金公式</strong>
+      有机物积累量 = 光合总量 - 呼吸消耗量<br>
+      高海拔/昼夜温差大 → 夜间低温 → 呼吸弱 → 积累多 → 口感甜
+    </div>
+    <div class="sub-heading">农业应用</div>
+    <ul class="tip-list green">
+      <li>合理密植 → 充分利用光能 → 提高光合效率</li>
+      <li>中耕松土 → 增加O₂ → 促进根系有氧呼吸 → 利于吸水吸肥</li>
+      <li>温室大棚增加CO₂ → 促进光合作用 → 提高产量</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-teal">🐾</span>
+      生物适应环境（高频考点）
+    </div>
+    <div class="sub-heading">常见适应类型速查</div>
+    <table class="score-table">
+      <tr><th>环境特征</th><th>生物特征</th><th>原因</th></tr>
+      <tr><td>干旱（西北/荒漠）</td><td>根系深长；叶片小/退化成刺；肉质茎储水</td><td>减少蒸腾，增加吸水</td></tr>
+      <tr><td>高寒（青藏高原）</td><td>植株矮小贴地；毛厚/脂肪多（动物）；红细胞多</td><td>保温御寒；运输O₂适应低氧</td></tr>
+      <tr><td>强紫外线</td><td>叶色深绿/发红；皮肤色素多</td><td>吸收/屏蔽紫外线</td></tr>
+      <tr><td>水生环境</td><td>流线型体形；鳃呼吸；侧线感振动</td><td>减少阻力；水中获O₂</td></tr>
+      <tr><td>寒冷冬季</td><td>落叶（减少蒸腾）；冬眠；迁徙</td><td>降低能耗；躲避低温</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-orange">♻️</span>
+      碳循环 · 物质循环
+    </div>
+    <div class="alert alert-info">
+      <strong>碳在自然界中的流动路径</strong>
+    </div>
+    <div class="chain" style="flex-direction: column; align-items: flex-start;">
+      <div style="display:flex; align-items:center; gap:6px;">
+        <span class="chain-item">大气CO₂</span>
+        <span class="chain-arrow">→光合→</span>
+        <span class="chain-item">植物有机物</span>
+        <span class="chain-arrow">→摄食→</span>
+        <span class="chain-item">动物</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:6px; margin-top:6px;">
+        <span class="chain-item">生物遗体</span>
+        <span class="chain-arrow">→分解者→</span>
+        <span class="chain-item">CO₂释放</span>
+      </div>
+    </div>
+    <ul class="tip-list" style="margin-top:10px">
+      <li>燃烧化石燃料 → 大量CO₂释放 → 温室效应 → 全球变暖</li>
+      <li>植树造林 → 固定CO₂ → 减缓温室效应</li>
+      <li>湿地/森林是重要"碳库"</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-purple">🌱</span>
+      生物多样性与保护
+    </div>
+    <div class="sub-heading">濒危原因（必背）</div>
+    <ul class="tip-list orange">
+      <li>栖息地丧失与破坏（最主要原因）</li>
+      <li>过度捕猎/采集</li>
+      <li>环境污染（水/空气/土壤）</li>
+      <li>外来物种入侵（竞争关系破坏原有生态）</li>
+    </ul>
+    <div class="sub-heading">保护措施</div>
+    <ul class="tip-list green">
+      <li>就地保护：建立自然保护区（最有效的方法）</li>
+      <li>迁地保护：动植物园、种质库</li>
+      <li>法律保护：野生动植物保护法、禁猎禁捕</li>
+      <li>宣传教育：提高公众保护意识</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB: 地理知识 ═══════════════ -->
+<div id="tab-geography" class="tab-content">
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-blue">🗺️</span>
+      中国四大地理区域（必考）
+    </div>
+    <table class="score-table">
+      <tr><th>区域</th><th>气候特征</th><th>农业类型</th><th>典型生物适应</th></tr>
+      <tr>
+        <td><strong>北方地区</strong></td>
+        <td>温带季风，冬冷夏热，降水集中夏季</td>
+        <td>旱地农业（小麦/玉米）</td>
+        <td>落叶树种；候鸟迁徙</td>
+      </tr>
+      <tr>
+        <td><strong>南方地区</strong></td>
+        <td>亚热带/热带季风，高温多雨，雨热同期</td>
+        <td>水田农业（水稻/茶叶）</td>
+        <td>常绿阔叶林；多样性丰富</td>
+      </tr>
+      <tr>
+        <td><strong>西北地区</strong></td>
+        <td>温带大陆性，干旱少雨，昼夜温差大</td>
+        <td>灌溉农业/绿洲农业（棉花/瓜果）</td>
+        <td>骆驼/骆驼刺；耐旱特征</td>
+      </tr>
+      <tr>
+        <td><strong>青藏地区</strong></td>
+        <td>高原山地，高寒，紫外线强</td>
+        <td>河谷农业（青稞/小麦）</td>
+        <td>牦牛；植株矮小贴地</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-orange">🌡️</span>
+      气候图表判读（必学技能）
+    </div>
+    <div class="alert alert-warning">
+      <strong>读气温曲线降水柱状图（双轴图）4步法</strong>
+    </div>
+    <ol class="step-list">
+      <li>看<strong>纵轴单位</strong>：左轴气温（℃），右轴降水（mm）</li>
+      <li>看<strong>气温曲线</strong>：最高/最低月、年较差大小 → 判断大陆性/海洋性</li>
+      <li>看<strong>降水柱</strong>：集中哪几个月 → 雨热同期=季风气候；冬雨=地中海</li>
+      <li>综合判断<strong>气候类型</strong>，描述农业影响</li>
+    </ol>
+    <div class="sub-heading">快速判断口诀</div>
+    <div class="alert alert-info">
+      夏高温冬寒冷+夏多雨 → 季风气候（温带/亚热带）<br>
+      全年少雨 → 温带大陆性或沙漠气候<br>
+      高寒+紫外线强 → 高原山地气候<br>
+      冬雨夏干 → 地中海气候（考得少但要知道）
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-green">⛰️</span>
+      地形与农业关系
+    </div>
+    <table class="score-table">
+      <tr><th>地形类型</th><th>农业特点</th><th>典型问题</th></tr>
+      <tr><td>平原</td><td>适宜大规模种植，机械化程度高</td><td>东北黑土地、长三角水田</td></tr>
+      <tr><td>山地/丘陵</td><td>梯田种植，水土流失风险高</td><td>南方丘陵茶园、云贵梯田</td></tr>
+      <tr><td>盆地</td><td>光照充足，气温高，有利热量</td><td>四川盆地，新疆吐鲁番</td></tr>
+      <tr><td>高原</td><td>气温低，生长期长，昼夜温差大</td><td>青藏高原河谷农业</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-teal">💧</span>
+      水资源与生态问题
+    </div>
+    <div class="sub-heading">常见生态问题及原因</div>
+    <table class="score-table">
+      <tr><th>生态问题</th><th>自然原因</th><th>人为原因</th></tr>
+      <tr><td>土地荒漠化</td><td>气候干旱，降水少</td><td>过度放牧、过度开垦、乱砍滥伐</td></tr>
+      <tr><td>水土流失</td><td>降水集中、地形陡峭</td><td>砍伐树木、不合理耕作</td></tr>
+      <tr><td>湿地萎缩</td><td>气候变暖，蒸发旺</td><td>围湖造田、引水灌溉、污染排放</td></tr>
+      <tr><td>生物多样性减少</td><td>自然灾害</td><td>栖息地破坏、环境污染、外来物种</td></tr>
+    </table>
+    <div class="sub-heading">治理措施万能模板</div>
+    <div class="formula">
+      工程措施：修水库/防护林/水渠/护坡
+      生物措施：退耕还林还草/植树造林/保护植被
+      管理措施：立法/设自然保护区/生态移民/宣传教育
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-purple">📍</span>
+      等高线地形图判读
+    </div>
+    <div class="grid-2">
+      <div class="mini-card">
+        <div class="mini-card-title">山顶</div>
+        <div class="mini-card-body">等高线闭合，数值中间高、四周低</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-card-title">山谷</div>
+        <div class="mini-card-body">等高线向高处凸出（"↑"形），可能有河流</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-card-title">山脊</div>
+        <div class="mini-card-body">等高线向低处凸出（"↓"形），分水岭</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-card-title">鞍部</div>
+        <div class="mini-card-body">两山顶之间，等高线两侧高中间低</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-card-title">陡坡</div>
+        <div class="mini-card-body">等高线密集，坡度大，水土流失风险高</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-card-title">缓坡</div>
+        <div class="mini-card-body">等高线稀疏，坡度小，适宜农业开发</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB: 答题模板 ═══════════════ -->
+<div id="tab-template" class="tab-content">
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-blue">🪜</span>
+      通用答题4步法
+    </div>
+    <ol class="step-list">
+      <li>
+        <strong>审题干，划限定词</strong><br>
+        <span style="font-size:13px;color:var(--text-light)">圈出"从地理角度"、"用生物知识"、"分析原因"、"提出建议"等关键词</span>
+      </li>
+      <li>
+        <strong>读材料，提取线索</strong><br>
+        <span style="font-size:13px;color:var(--text-light)">带着问题回看图文，标注极端数据、变化趋势、特殊现象</span>
+      </li>
+      <li>
+        <strong>调知识，建联系</strong><br>
+        <span style="font-size:13px;color:var(--text-light)">材料线索 + 教材知识点 = 答题核心。西北→干旱→耐旱特征</span>
+      </li>
+      <li>
+        <strong>组答案，规范写</strong><br>
+        <span style="font-size:13px;color:var(--text-light)">用①②③分点，因果完整，学科术语，多角度覆盖</span>
+      </li>
+    </ol>
+  </div>
+
+  <div class="section-label">🌾 场景模板一：农业分析类</div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-green">🌾</span>
+      分析某地农产品品质优良/产量高的原因
+    </div>
+    <div class="alert alert-info">
+      <strong>地理角度（必答）</strong><br>
+      ①光照充足，太阳辐射强，利于光合作用<br>
+      ②昼夜温差大，夜间气温低，呼吸作用弱，有机物消耗少<br>
+      ③气温较低/海拔高，病虫害少，农药使用少<br>
+      ④水源充足（冰川融水/降雨充沛），灌溉便利<br>
+      ⑤土壤肥沃，矿物质丰富
+    </div>
+    <div class="alert alert-success">
+      <strong>生物角度（必答）</strong><br>
+      ①光合作用强 → 有机物（糖分/淀粉）积累多<br>
+      ②呼吸作用弱 → 有机物消耗少 → 净积累量高<br>
+      ③生长期长/适温环境 → 充分发育
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-teal">🏔️</span>
+      评价某地发展农业的条件
+    </div>
+    <div class="alert alert-success">
+      <strong>有利条件答题套路</strong><br>
+      地形：平坦开阔，土壤肥沃，适合耕作<br>
+      气候：雨热同期/光热充足/生长期长<br>
+      水源：靠近河流/冰川融水，灌溉便利<br>
+      其他：交通便利，市场广阔
+    </div>
+    <div class="alert alert-danger">
+      <strong>不利条件答题套路</strong><br>
+      气候：干旱/洪涝/低温冻害/台风<br>
+      地形：崎岖/坡度大/水土流失<br>
+      水源：严重不足/季节性短缺
+    </div>
+  </div>
+
+  <div class="section-label">🌳 场景模板二：生态保护类</div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-orange">🌳</span>
+      某区域生态问题原因+措施
+    </div>
+    <div class="alert alert-warning">
+      <strong>分析问题（原因）= 自然 + 人为</strong><br>
+      自然：气候变暖/降水减少/蒸发旺盛/自然灾害<br>
+      人为：过度开垦/乱砍滥伐/过度放牧/工业污染
+    </div>
+    <div class="alert alert-success">
+      <strong>提出措施 = 工程 + 生态 + 管理</strong><br>
+      工程：修防护林带/水库/护坡/隔离带<br>
+      生态：退耕还林还草/植树造林/建自然保护区<br>
+      管理：立法执法/减少人类活动/宣传教育/生态移民
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-purple">🐼</span>
+      分析某生物濒危/数量变化原因
+    </div>
+    <div class="alert alert-info">
+      <strong>数量减少原因套路</strong><br>
+      地理：栖息地减少/气候变化/食物减少（联系地理环境变化）<br>
+      生物：天敌增多/竞争者增多/食物链受干扰/繁殖率低
+    </div>
+    <div class="alert alert-purple">
+      <strong>如果问"某捕食者消失，食草动物数量如何变化"</strong><br>
+      ① 短期：失去天敌 → 数量增加<br>
+      ② 长期：食物（植物）减少 → 种内竞争 → 数量下降 → 趋向新平衡
+    </div>
+  </div>
+
+  <div class="section-label">🏗️ 场景模板三：工程建设类</div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-blue">🏗️</span>
+      分析工程建设对生态的影响
+    </div>
+    <div class="alert alert-success">
+      <strong>有利影响</strong><br>
+      调蓄洪水/保障用水/改善航运/发展灌溉农业/调节局地气候
+    </div>
+    <div class="alert alert-danger">
+      <strong>不利影响</strong><br>
+      库区生物栖息地被淹没 → 物种减少<br>
+      水流变缓 → 泥沙淤积/水质变化<br>
+      鱼类洄游通道受阻 → 渔业资源减少<br>
+      地质灾害风险（地震/滑坡）
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB: 历年真题 ═══════════════ -->
+<div id="tab-cases" class="tab-content">
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-blue">📚</span>
+      历年真题主题一览（2021—2025）
+    </div>
+    <table class="score-table">
+      <tr><th>年份</th><th>真题主题</th><th>核心考点</th><th>难度特点</th></tr>
+      <tr>
+        <td><span class="year-badge">2021</span></td>
+        <td>高原夏菜运输 <span style="color:#ea580c;font-size:11px">（模拟题参考）</span></td>
+        <td>区域气候差异、植物生长条件、运输区位</td>
+        <td>2021首年考试，真题主题待核实</td>
+      </tr>
+      <tr>
+        <td><span class="year-badge">2022</span></td>
+        <td>黄芪（药用植物）</td>
+        <td>植物分布规律、温带大陆性气候、干旱适应</td>
+        <td>生物+地理融合，中等难度</td>
+      </tr>
+      <tr>
+        <td><span class="year-badge">2023</span></td>
+        <td>陆生蜗牛（多地调查）</td>
+        <td>碳循环、干湿分区、样方法、种群数量</td>
+        <td>上热搜！信息量大，难度跳升</td>
+      </tr>
+      <tr style="background:#eff6ff">
+        <td><span class="year-badge" style="background:#1d4ed8">2024</span></td>
+        <td>昆虫与植物G（兰科）</td>
+        <td>昆虫传粉、植物适应、食草昆虫分布、读图读表</td>
+        <td>⭐ 大量表格数据，读表能力成关键</td>
+      </tr>
+      <tr style="background:#f0fdf4">
+        <td><span class="year-badge" style="background:#15803d">2025</span></td>
+        <td>珍稀水生昆虫与鱼类（甲乙丙三地）</td>
+        <td>水生生物分类、海拔与含氧量、城镇化污染、种间竞争</td>
+        <td>⭐⭐ 最新！读图读表题占多数，难度最高</td>
+      </tr>
+    </table>
+    <div class="alert alert-info" style="margin-top:12px">
+      📌 <strong>趋势判断</strong>：近两年（2024、2025）命题明显转向"读图读表+因果链推断"，纯背知识点越来越难得分。
+    </div>
+  </div>
+
+  <!-- ───── 2025 深度解析 ───── -->
+  <div class="card" style="border-top:4px solid #15803d">
+    <div class="card-title">
+      <span class="card-icon icon-green">🐟</span>
+      2025年真题 · 珍稀水生昆虫与鱼类 深度解析
+      <span class="tag tag-red" style="float:right;margin-top:2px">最新真题</span>
+    </div>
+    <div class="alert alert-info">
+      <strong>案例背景</strong>：研究者在甲（海拔3800m）、乙（海拔2100m）、丙（海拔2000m）三地溪流中，调查珍稀水生昆虫和鱼类的分布情况。乙地距城镇较近，甲地最偏远。表格数据包含各地溪流含氧量、常见昆虫种类数、珍稀昆虫种类数等。
+    </div>
+
+    <div class="sub-heading">📋 题目结构（回忆版，共6题）</div>
+    <table class="score-table">
+      <tr><th>题号</th><th>题型</th><th>考查内容</th><th>得分要点</th></tr>
+      <tr>
+        <td>42题</td>
+        <td>选择题</td>
+        <td>金沙江/澜沧江/怒江相对北京的方位（读图）</td>
+        <td>西南方向；三江发源于青藏高原，流经云南</td>
+      </tr>
+      <tr>
+        <td>43题</td>
+        <td>选择题</td>
+        <td>三江流向特征</td>
+        <td>自北向南流；三江并流，近乎平行</td>
+      </tr>
+      <tr>
+        <td>44题</td>
+        <td>选择/判断</td>
+        <td>水生昆虫与鱼类的区别（有无脊椎、体温等）</td>
+        <td>鱼有脊柱（脊索动物），昆虫无脊柱（节肢动物）；两者均多细胞；均有适应水生的结构</td>
+      </tr>
+      <tr>
+        <td>45题</td>
+        <td>简答（2分）</td>
+        <td>分析影响溪流含氧量的两个因素</td>
+        <td>①海拔越高→气压越低→含氧量越低；②生物种类越多→耗氧量越大→含氧量越低（或：含氧量高→生物多样性高）</td>
+      </tr>
+      <tr>
+        <td>46题</td>
+        <td>简答（3分）</td>
+        <td>分析乙地珍稀水生昆虫种数少的原因</td>
+        <td>见下方详解</td>
+      </tr>
+    </table>
+
+    <div class="sub-heading">🌟 46题满分答案拆解（最难题，3分）</div>
+    <div class="alert" style="background:#f0fdf4;border-left:4px solid #16a34a;padding:14px;">
+      <strong>题目</strong>：分析甲乙丙三地中，乙地珍稀水生昆虫种数最少的原因。
+    </div>
+    <ul class="tip-list">
+      <li><span class="tag tag-red">①水质污染（1分）</span> 乙地距城镇较近 → 工业/生活污水排放 → 溪流水质变差 → 对污染敏感的珍稀昆虫难以生存，种数减少</li>
+      <li><span class="tag tag-blue">②含氧量影响（1分）</span> 污染 + 海拔适中 → 溪流含氧量相对较低 → 水生昆虫生命活动受限 → 珍稀昆虫种数减少</li>
+      <li><span class="tag tag-orange">③种间竞争（1分）</span> 乙地常见水生昆虫种类多 → 与珍稀昆虫竞争食物/氧气/栖息地 → 珍稀昆虫受到排挤，种数减少</li>
+    </ul>
+    <div class="formula">
+      答题公式：污染（城镇化）→ 环境恶化 → 珍稀物种消失<br>
+      + 竞争者增多 → 珍稀物种受压 → 种数减少<br>
+      ⭐ 三点各写一条，分点表达！
+    </div>
+
+    <div class="sub-heading">🎯 本题考查的跨学科逻辑</div>
+    <ul class="tip-list">
+      <li><span class="tag tag-blue">地理</span> 三江并流区域（云南/西藏）→ 海拔对气压/含氧量的影响</li>
+      <li><span class="tag tag-green">生物</span> 脊椎动物 vs 无脊椎动物分类；水生生物对环境质量的指示作用</li>
+      <li><span class="tag tag-purple">生态</span> 种间竞争；生物多样性与环境质量的关系；城镇化对生态的干扰</li>
+    </ul>
+  </div>
+
+  <!-- ───── 2024 深度解析 ───── -->
+  <div class="card" style="border-top:4px solid #1d4ed8">
+    <div class="card-title">
+      <span class="card-icon icon-blue">🦋</span>
+      2024年真题 · 昆虫与植物G 深度解析
+      <span class="tag tag-blue" style="float:right;margin-top:2px">次新真题</span>
+    </div>
+    <div class="alert alert-info">
+      <strong>案例背景</strong>：2019年5月，研究小组在某省甲、乙两地，对野生草本植物G的开花情况及访花昆虫（食草昆虫）进行了调查。植物G开花期间，食草昆虫的访问行为与植物的花粉传播、种子结实密切相关。
+    </div>
+
+    <div class="sub-heading">📋 题目结构（42–46题，共5题）</div>
+    <table class="score-table">
+      <tr><th>题号</th><th>题型</th><th>考查内容</th><th>核心答点</th></tr>
+      <tr>
+        <td>42题</td>
+        <td>选择题</td>
+        <td>从表格读取甲乙两地昆虫访花频次数据，判断差异</td>
+        <td>读表取数：根据题目给出的频次表，选出访花频率更高的地点</td>
+      </tr>
+      <tr>
+        <td>43题</td>
+        <td>选择题</td>
+        <td>昆虫访花频次差异的生物学意义</td>
+        <td>访花频次越高 → 花粉传播越多 → 种子结实率越高 → 种群更新能力强</td>
+      </tr>
+      <tr>
+        <td>44题</td>
+        <td>选择题</td>
+        <td>甲乙两地的地理环境差异对植物G分布的影响</td>
+        <td>结合地形/气候/人类活动读图，选出影响最大的环境因素</td>
+      </tr>
+      <tr>
+        <td>45题</td>
+        <td>简答（2分）</td>
+        <td>分析植物G为什么要吸引昆虫传粉（从繁殖角度）</td>
+        <td>①有性生殖 → 产生遗传多样性（不同于无性繁殖）；②保证基因交流，增强种群适应性</td>
+      </tr>
+      <tr>
+        <td>46题</td>
+        <td>简答（3分）</td>
+        <td>从生物与地理两个角度分析植物G濒危原因</td>
+        <td>见下方详解</td>
+      </tr>
+    </table>
+
+    <div class="sub-heading">🌟 46题满分答案拆解（最难题，3分）</div>
+    <div class="alert" style="background:#eff6ff;border-left:4px solid #1d4ed8;padding:14px;">
+      <strong>题目</strong>：从生物和地理两个角度，分析野生植物G濒危的主要原因。
+    </div>
+    <ul class="tip-list">
+      <li><span class="tag tag-green">生物角度①（1分）</span> 传粉昆虫数量减少 → 花粉无法有效传播 → 种子结实率下降 → 种群数量减少</li>
+      <li><span class="tag tag-green">生物角度②（1分）</span> 植物G属于兰科，专性传粉 → 对特定昆虫依赖性强 → 一旦传粉者消失则无法繁殖</li>
+      <li><span class="tag tag-blue">地理角度（1分）</span> 人类活动扩张（农业/建设用地）→ 野生植物G栖息地减少/破碎化 → 种群隔离，无法交配，数量下降</li>
+    </ul>
+    <div class="formula">
+      答题模板：<br>
+      生物角度：传粉者减少 → 繁殖受阻 → 种群下降<br>
+      地理角度：人类活动 → 栖息地减少/破坏 → 无法生存<br>
+      ⭐ 两个角度必须都写，各用一个完整因果链！
+    </div>
+
+    <div class="sub-heading">🔑 本题高频得分词汇</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+      <span class="tag tag-green">有性生殖</span>
+      <span class="tag tag-green">遗传多样性</span>
+      <span class="tag tag-green">传粉者</span>
+      <span class="tag tag-green">种子结实率</span>
+      <span class="tag tag-blue">栖息地破碎化</span>
+      <span class="tag tag-blue">人类活动干扰</span>
+      <span class="tag tag-orange">专性依赖</span>
+      <span class="tag tag-red">种群数量下降</span>
+    </div>
+  </div>
+
+  <!-- ───── 2023 解析 ───── -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-orange">🐌</span>
+      2023年真题 · 陆生蜗牛 深度解析
+    </div>
+    <div class="alert alert-info">
+      <strong>案例背景</strong>：陆生蜗牛主要以植物为食，蜗牛壳由碳酸钙（~95%）组成。研究者通过蜗牛壳中碳元素含量判断当地植被情况，并在全国多个干湿区采集样本。
+    </div>
+    <div class="sub-heading">核心知识链</div>
+    <ul class="tip-list">
+      <li><span class="tag tag-green">碳循环</span> 大气CO₂ → 植物光合固定 → 蜗牛取食植物获碳 → 碳酸钙沉积在壳中</li>
+      <li><span class="tag tag-blue">干湿分区</span> 湿润区植被丰富 → 蜗牛食物多 → 壳中碳含量高；干旱区相反</li>
+      <li><span class="tag tag-purple">研究方法</span> 样方法；随机取样；避免主观选择</li>
+      <li><span class="tag tag-orange">跨学科结论</span> 蜗牛壳碳含量 → 反推当地植被 → 判断湿润程度（地理×生物联动）</li>
+    </ul>
+    <div class="sub-heading">关键得分句</div>
+    <div class="formula">
+      蜗牛从植物中获取碳元素（1分）<br>
+      → 蜗牛壳中碳酸钙越多（1分）<br>
+      → 说明该地植被越丰富（1分）<br>
+      → 反映当地气候越湿润（1分）
+    </div>
+  </div>
+
+  <!-- ───── 2022 解析 ───── -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-teal">🌿</span>
+      2022年真题 · 黄芪 关键考点
+    </div>
+    <div class="alert alert-info">
+      <strong>案例背景</strong>：黄芪是多年生草本药用植物，主产于内蒙古、甘肃、山西等地。其药效成分（多糖、皂苷、黄酮）含量与生长环境密切相关。
+    </div>
+    <ul class="tip-list">
+      <li><span class="tag tag-blue">地理①</span> 内蒙古/甘肃 → 温带大陆性气候 → 干旱少雨，昼夜温差大，光照充足</li>
+      <li><span class="tag tag-green">生物①</span> 根系深长发达 → 吸收深层土壤水分 → 适应干旱</li>
+      <li><span class="tag tag-orange">核心联动</span> 昼夜温差大 → 白天光合积累有机物多，夜间呼吸消耗少 → 有机物净积累量大 → 药效成分含量高</li>
+      <li><span class="tag tag-purple">举一反三</span> 新疆哈密瓜/棉花/西北水果为什么特别甜 → 同一套逻辑！</li>
+    </ul>
+  </div>
+
+  <!-- ───── 历年规律总结 ───── -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-purple">📊</span>
+      历年命题规律 · 一眼看懂趋势
+    </div>
+    <table class="score-table">
+      <tr><th>维度</th><th>2021–2022</th><th>2023</th><th>2024–2025</th></tr>
+      <tr>
+        <td><strong>案例载体</strong></td>
+        <td>植物/农业（熟悉）</td>
+        <td>动物+地理（蜗牛）</td>
+        <td>动植物关系/水生生物（陌生）</td>
+      </tr>
+      <tr>
+        <td><strong>图表比重</strong></td>
+        <td>少（文字为主）</td>
+        <td>中等</td>
+        <td>高（大量表格+分布图）</td>
+      </tr>
+      <tr>
+        <td><strong>失分重灾区</strong></td>
+        <td>答案不完整</td>
+        <td>碳循环逻辑断裂</td>
+        <td>图表数据看不懂/不会用</td>
+      </tr>
+      <tr>
+        <td><strong>核心能力</strong></td>
+        <td>知识点调用</td>
+        <td>因果链推理</td>
+        <td>读图+因果+双视角</td>
+      </tr>
+    </table>
+    <div class="alert alert-warn" style="margin-top:12px">
+      💡 <strong>给2026考生的预判</strong>：命题很可能继续以"生态系统/物种保护/人地关系"为主题，图表题必然是主力，建议重点练习"看图说话"和"双视角（生物+地理）分点作答"。
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB: 冲刺提分 ═══════════════ -->
+<div id="tab-sprint" class="tab-content">
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-red">🎯</span>
+      7分→15分 差距在哪里？
+    </div>
+    <div class="alert alert-danger">
+      <strong>二模7分的典型失分原因</strong>
+    </div>
+    <table class="score-table">
+      <tr><th>失分行为</th><th>得分行为</th></tr>
+      <tr><td>大白话："这里光多、土好"</td><td>术语："光照充足，太阳辐射强，土壤肥沃"</td></tr>
+      <tr><td>照抄材料原文</td><td>提炼信息，用自己话+术语表达含义</td></tr>
+      <tr><td>只答地理，忘了生物角度</td><td>地理+生物双角度，分点①②作答</td></tr>
+      <tr><td>因果链断裂："气候干→植物小"</td><td>完整链：气候干旱→蒸腾旺→植物减少水分散失→叶片小或退化成刺</td></tr>
+      <tr><td>不看图，全靠背</td><td>先从图表提取数据，再结合知识作答</td></tr>
+      <tr><td>建议只写一条</td><td>工程+生态+管理，写3点，覆盖得分点</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-orange">📅</span>
+      冲刺备考计划（2周版）
+    </div>
+    <div class="sub-heading">第1周：夯实知识</div>
+    <ul class="tip-list">
+      <li><strong>Day 1-2：</strong>精读生命科学必考点（食物链/光合/适应）+ 做笔记</li>
+      <li><strong>Day 3-4：</strong>精读地理必考点（四大区域/气候/生态）+ 做笔记</li>
+      <li><strong>Day 5-6：</strong>背熟5大答题模板，各模板默写一遍</li>
+      <li><strong>Day 7：</strong>用自己的话复述每个模板，检验是否真理解</li>
+    </ul>
+    <div class="sub-heading">第2周：刷真题练手感</div>
+    <ul class="tip-list orange">
+      <li><strong>Day 8-9：</strong>精做2022、2023真题，逐题对答案，找失分原因</li>
+      <li><strong>Day 10-11：</strong>精做2024真题 + 一套模拟题，重点练读图读表</li>
+      <li><strong>Day 12-13：</strong>整理自己的错题，归纳高频失分知识点</li>
+      <li><strong>Day 14：</strong>考前复习答题模板+关键术语，轻松备战</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-purple">⚡</span>
+      考场应急策略
+    </div>
+    <div class="alert alert-info">
+      <strong>读材料的顺序</strong><br>
+      先看题目再读材料 → 带着问题找答案，效率翻倍
+    </div>
+    <div class="alert alert-success">
+      <strong>选择题卡住了怎么办</strong><br>
+      用排除法：排掉科学错误的选项，剩下2个选与材料最对应的那个
+    </div>
+    <div class="alert alert-warning">
+      <strong>简答题没思路怎么办</strong><br>
+      1. 默想答题公式：地理条件→生物响应→结论<br>
+      2. 看材料是否有图表数值可引用<br>
+      3. 写模板框架，哪怕内容不全也能得基础分
+    </div>
+    <div class="alert alert-danger">
+      <strong>时间不够怎么办</strong><br>
+      选择题先全做完（有固定分值）→ 简答题按分值决定写多少<br>
+      1分题写1-2句，3分题写3个点
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-green">📌</span>
+      高频考点速查卡（考前背这个）
+    </div>
+    <div class="sub-heading">生物TOP5高频词</div>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+      <span class="tag tag-green">光合作用</span>
+      <span class="tag tag-green">呼吸作用</span>
+      <span class="tag tag-green">食物链箭头</span>
+      <span class="tag tag-green">生物适应性</span>
+      <span class="tag tag-green">碳循环</span>
+      <span class="tag tag-green">生物多样性</span>
+      <span class="tag tag-green">栖息地丧失</span>
+    </div>
+    <div class="sub-heading">地理TOP5高频词</div>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+      <span class="tag tag-blue">昼夜温差大</span>
+      <span class="tag tag-blue">光照充足</span>
+      <span class="tag tag-blue">降水集中</span>
+      <span class="tag tag-blue">季风气候</span>
+      <span class="tag tag-blue">退耕还林</span>
+      <span class="tag tag-blue">栖息地保护</span>
+    </div>
+    <div class="sub-heading">万能因果链</div>
+    <div class="formula">
+      西北：干旱少雨 → 光照强，昼夜温差大 → 有机物积累多，口感甜
+      青藏：高寒缺氧 → 低温，强紫外 → 植株矮贴地，动物厚毛厚脂
+      南方：高温多雨 → 雨热同期 → 植被茂盛，生物多样性丰富
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon icon-blue">💡</span>
+      3条最重要的提分原则
+    </div>
+    <div class="alert alert-info">
+      <strong>原则一：材料第一</strong><br>
+      所有答案的依据来自材料，不是凭空背诵。每道题先找材料证据，再配知识点。
+    </div>
+    <div class="alert alert-success">
+      <strong>原则二：双学科视角</strong><br>
+      每个问题都尝试从地理+生命科学两个角度作答，分点写，绝不只写一个学科。
+    </div>
+    <div class="alert alert-warning">
+      <strong>原则三：术语代替白话</strong><br>
+      把大脑里的"口语直觉"翻译成学科术语再落笔。这一步就是得分与失分的分水岭。
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ SCRIPT ═══════════════ -->
+<script>
+  function showTab(name) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
